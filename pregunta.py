@@ -15,9 +15,9 @@ def clean_data():
 
     # Eliminacion de columnas innecesarias
     df = df.drop(columns=["Unnamed: 0"])
-
+    
     # Unificar '-' y '_' como ' '
-    df = df.replace("-", " ").replace("_", " ")
+    df = df.replace({'-': ' ', '_': ' '}, regex=True)
     
     # Convertir mayusculas a minusculas
     df = df.apply(lambda x: x.str.lower() if x.dtype == "object" else x)
@@ -43,7 +43,4 @@ def clean_data():
     # Limpiza de datos duplicados y nulos
     df = df.drop_duplicates().dropna()
 
-    print(df)
     return df
-
-clean_data()
